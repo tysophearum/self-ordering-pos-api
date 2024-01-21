@@ -1,0 +1,14 @@
+diff a/.gitlab-ci.yml b/.gitlab-ci.yml	(rejected hunks)
+@@ -30,10 +30,9 @@
+     - eval $(ssh-agent -s)
+     - mkdir -p ~/.ssh
+     - chmod 700 ~/.ssh
+-    - echo -e "Hello world" > ~/.ssh/id_rsa
++    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+     - chmod 700 ~/.ssh/id_rsa
+-    - cat ~/.ssh/id_rsa
+-    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
++    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+     
+   script:
+     - ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@137.184.220.73 "docker ps"

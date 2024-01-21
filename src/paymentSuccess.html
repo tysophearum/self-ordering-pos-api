@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+  </head>
+    <style>
+      body {
+        text-align: center;
+        padding: 40px 0;
+        background: #EBF0F5;
+      }
+        h1 {
+          color: #88B04B;
+          font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+          font-weight: 900;
+          font-size: 120px;
+          margin-bottom: 6px;
+        }
+        p {
+          color: #404F5E;
+          font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+          font-size:20px;
+          font-size: 40px;
+          margin: 0;
+        }
+      i {
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+        margin-left:-15px;
+      }
+      .card {
+        width: 80%;
+        background: white;
+        padding: 60px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+      }
+    </style>
+    <body>
+      <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+          <i class="checkmark">✓</i>
+        </div>
+        <h1>ជោគជ័យ</h1> 
+        <p>លេខបញ្ជាទិញរបស់អ្នកគឺ</p>
+        <h1 id="orderNumber">1</h1> 
+        <p>ការបញ្ជាទិញរបស់អ្នកនឹងរួចរាល់ក្នុងពេលឆាប់ៗនេះ!</p>
+        <h1>សូមអរគុណ!</h1>
+      </div>
+    </body>
+    <script>
+      // Get the current URL
+      const currentURL = window.location.href; // Replace with your specific URL if needed
+
+      // Create a URL object from the URL string
+      const url = new URL(currentURL);
+
+      // Access and read individual query parameters
+      const orderId = url.searchParams.get('orderId'); // Gets the value of 'param1'
+
+      fetch('http://137.184.220.73:3001/order/number?orderId='+orderId) // Replace with the API URL you want to request
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse the response as JSON
+      })
+      .then(data => {
+        // Use the data from the response
+        document.getElementById('orderNumber').textContent = data
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    </script>
+</html>
